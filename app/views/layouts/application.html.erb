@@ -7,6 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body id="store">
+
 	<div id="banner">
     <%= form_tag store_path, class: 'locale' do %>
         <%= select_tag 'set_locale',
@@ -17,10 +18,18 @@
     <% end %>
 		<%= image_tag("logo.png") %>
 		<%= @page_title || t('layouts.application.title') %>
+
 	</div>
 	<div id="columns">
 		<div id="side">
-			<% if @cart %>
+      <% if session[:user_id].blank?  %>
+        <div>
+          <h3><%= link_to 'Sign Up!', new_user_path %></h3>
+          <h3 style="color: white">Already registered? - <%= link_to 'Login!', login_path %></h3>
+        </div>
+      <% end %>
+
+			<% if  @cart %>
 			<%= hidden_div_if(@cart.line_items.empty?, :id => "cart") do %>
 				<%= render @cart %>
 			<% end %>
@@ -31,16 +40,19 @@
 			<a href="http://www..."><%= t('.contact')%> </a><br />
 			<p style="color:white;"><%= Time.now.month %>/<%= Time.now.day %>/<%= Time.now.year %></p>
 			
-			<% if session[:user_id] %>
+			<% if session[:admin]  %>
 				<br />
 				<%= link_to "Orders", orders_path %><br />
 				<%= link_to "Products", products_path %><br />
 				<%= link_to "Users", users_path %><br />
 				<br />
-				<%= button_to "Logout", logout_path, :method => :delete %>
 				<% end %>
+      <% if session[:user_id]  %>
+      <%= button_to "Logout", logout_path, :method => :delete %>
+          <% end %>
 		</div>
 		<div id="main">
+
 			<%= yield %>
 		</div>
 	</div>

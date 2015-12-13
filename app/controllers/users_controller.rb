@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  skip_before_filter :authorize
   # GET /users
   # GET /users.json
   def index
@@ -25,7 +26,7 @@ class UsersController < ApplicationController
   # GET /users/new.json
   def new
     @user = User.new
-
+    session[:user_id] = @user.id
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @user }
@@ -41,10 +42,10 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(params[:user])
-
+    session[:user_id] = @user.id
     respond_to do |format|
       if @user.save
-        format.html { redirect_to users_url, notice: 'User was successfully created.' }
+        format.html { redirect_to store_url}
         format.json { render json: @user, status: :created, location: @user }
       else
         format.html { render action: "new" }

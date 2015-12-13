@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
-  attr_accessible :hashed_password, :name, :password, :password_confirmation
-  
+  attr_accessible :hashed_password, :name, :password, :password_confirmation, :admin
+
+
+
   after_destroy :ensure_an_admin_remains
   
   validates :name, :presence => true, :uniqueness => true
@@ -10,7 +12,11 @@ class User < ActiveRecord::Base
   attr_reader :password
   
   validate :password_must_be_present
-  
+
+  def admin?
+    :admin
+  end
+
   def password=(password)
     @password = password
     
@@ -31,7 +37,9 @@ class User < ActiveRecord::Base
   def encrypt_password(password, salt)
     Digest::SHA2.hexdigest(password + "wibble" + salt)
   end
-  
+  def User.encrypt_password(password, salt)
+    Digest::SHA2.hexdigest(password + "wibble" + salt)
+  end
   private
   
   def password_must_be_present
