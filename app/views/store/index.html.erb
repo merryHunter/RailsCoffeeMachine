@@ -2,7 +2,7 @@
 <p id="notice"><%= notice %></p>
 <% end %>
 
-<h1>Your Pragmatic Catalog</h1>
+<h1>Drinks Catalog</h1>
 
 <% @products.each do |product| %>
 	<div class="entry">
@@ -11,9 +11,23 @@
                 :method => :post, :remote => true %>
 		<h3><%= product.title %></h3>
 		<%= sanitize(product.description) %>
+    <h4>Add ingredient...
+    <%= select_tag 'ingredient',
+                    options_from_collection_for_select(@ingredients, 'id', 'title' )
+                     %>
+    </h4>
 		<div class="price_line">
 			<span class="price"><%= number_to_currency(product.price) %></span>
-			<%= button_to 'Add To Cart', line_items_path(:product_id => product), :remote => true %>
+      <% if session[:user_id] || session[:admin]  %>
+			    <%= button_to 'Add To Cart', line_items_path(:product_id => product, :user_id => @user.id), :remote => true %>
+      <% end %>
 		</div>
 	</div>
 <% end %>
+<script>
+   function get_selected_ingredient(){
+    var e = document.getElementById("select_ingredient");
+    return e.options[e.selectedIndex].value;
+  }
+
+</script>

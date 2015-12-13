@@ -30,7 +30,7 @@
         <% else %>
           <div><%= link_to 'Profile', users_path %></div>
           <div><h3 style="color: white">
-            Credit value: 
+            Credit value:
             <%= get_credit_value(session[:user_id]) %>
           </h3></div>
       <% end %>
@@ -53,7 +53,7 @@
 				<%= link_to "Users", users_path %><br />
 				<br />
 				<% end %>
-      <% if session[:user_id]  %>
+      <% if session[:user_id] || session[:admin]  %>
       <%= button_to "Logout", logout_path, :method => :delete %>
           <% end %>
 		</div>

@@ -2,7 +2,6 @@ class User < ActiveRecord::Base
   attr_accessible :hashed_password, :name, :password, :password_confirmation, :admin, :credit
 
 
-
   after_destroy :ensure_an_admin_remains
   
   validates :name, :presence => true, :uniqueness => true
@@ -12,7 +11,8 @@ class User < ActiveRecord::Base
   attr_reader :password
   
   validate :password_must_be_present
-  validates :credit, numericality: true
+  validates :credit, :numericality => {greater_than_or_equal_to: 0}
+
   def admin?
     :admin
   end

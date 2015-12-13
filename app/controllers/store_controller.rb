@@ -8,6 +8,9 @@ class StoreController < ApplicationController
     else
       @products = Product.all
       @cart = current_cart
+      @ingredients = Ingredient.all
+      @user = User.find_by_id(session[:user_id])
+      logger.debug(@user.credit)
     end
   end
 end

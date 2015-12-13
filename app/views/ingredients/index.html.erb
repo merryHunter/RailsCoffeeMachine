@@ -14,8 +14,6 @@
 <% @ingredients.each do |ingredient| %>
   <tr>
     <td><%= ingredient.title %></td>
-    <td><%= ingredient.description %></td>
-    <td><%= ingredient.image_url %></td>
     <td><%= ingredient.price %></td>
     <td><%= ingredient.amount %></td>
     <td><%= link_to 'Show', ingredient %></td>

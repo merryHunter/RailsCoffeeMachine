@@ -33,13 +33,25 @@ class OrdersController < ApplicationController
       redirect_to store_url, :notice => "your cart is empty!"
       return
     end
-    
-    @order = Order.new
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @order }
+    @order = Order.new
+    @order.add_line_items_from_cart(current_cart)
+    logger.debug("DEBUG_ORDER")
+    logger.debug(session[:user_id])
+    logger.debug(params[:user_id])
+
+    @user = User.find_by_id(session[:user_id])
+    @user.credit -= current_cart.total_price
+    @user.save
+    @order.cart_id = @cart.id
+    @order.user_id = @user.id
+    @order.name = @user.id.to_s
+    @order.price = current_cart.total_price
+    if @order.save
+      Cart.destroy(session[:cart_id])
+      session[:cart_id] = nil
     end
+    redirect_to store_url, :notice => "Successful!"
   end
 
   # GET /orders/1/edit

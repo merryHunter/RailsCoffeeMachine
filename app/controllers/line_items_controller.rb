@@ -43,18 +43,30 @@ class LineItemsController < ApplicationController
   # POST /line_items
   # POST /line_items.json
   def create
+    logger.debug("CREATE ORDER ELEMENT")
     @cart = current_cart
     product = Product.find(params[:product_id])
-    @line_item = @cart.add_product(product.id)
+    # ingredient = Ingredient.find(params[:ingredient])
+    # logger.debug("INGREDIENT" + ingredient.title)
+    user = User.find_by_id(params[:user_id])
+    if @cart.total_price + product.price <= user.credit
+      logger.debug("ADD ORDER ELEMENT")
+      @line_item = @cart.add_product(product.id)
+      respond_to do |format|
+        if @line_item.save
+          format.html { redirect_to(store_url) }
+          format.json { render json: @line_item, status: :created, location: @line_item }
+          format.js { @current_item = @line_item }
+    else
+      logger.debug("NOT ENOUGH ELEMENT")
+      format.html { render action: "new" }
+      format.json { render json: @line_item.errors, status: :unprocessable_entity,  notice: 'You do not have enough credit value!' }
+      # redirect_to store_path, notice: 'You do not have enough credit value!'
+    end
 
-    respond_to do |format|
-      if @line_item.save
-        format.html { redirect_to(store_url) }
-        format.json { render json: @line_item, status: :created, location: @line_item }
-        format.js { @current_item = @line_item }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @line_item.errors, status: :unprocessable_entity }
+
+      # else
+
       end
     end
   end
