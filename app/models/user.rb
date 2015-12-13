@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :hashed_password, :name, :password, :password_confirmation, :admin
+  attr_accessible :hashed_password, :name, :password, :password_confirmation, :admin, :credit
 
 
 
@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   attr_reader :password
   
   validate :password_must_be_present
-
+  validates :credit, numericality: true
   def admin?
     :admin
   end

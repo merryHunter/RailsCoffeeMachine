@@ -27,6 +27,12 @@
           <h3><%= link_to 'Sign Up!', new_user_path %></h3>
           <h3 style="color: white">Already registered? - <%= link_to 'Login!', login_path %></h3>
         </div>
+        <% else %>
+          <div><%= link_to 'Profile', users_path %></div>
+          <div><h3 style="color: white">
+            Credit value: 
+            <%= get_credit_value(session[:user_id]) %>
+          </h3></div>
       <% end %>
 
 			<% if  @cart %>

@@ -43,6 +43,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     session[:user_id] = @user.id
+    session[:credit] = @user.credit
     respond_to do |format|
       if @user.save
         format.html { redirect_to store_url}

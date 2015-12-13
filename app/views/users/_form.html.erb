@@ -18,14 +18,13 @@
     <%= f.label :name %><br />
     <%= f.text_field :name, :size => 40 %>
   </div>
+
   <div class="field">
-    <%= f.label 'Password' %><br />
-    <%= f.password_field :password, :size => 40 %>
+    <%= f.label :'Credit value' %><br />
+    <%= f.text_field :credit, :size => 40 %>
   </div>
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, :size => 40 %>
-  </div>
+
+
   <div class="actions">
     <%= f.submit %>
   </div>
