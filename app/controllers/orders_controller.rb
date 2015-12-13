@@ -1,4 +1,7 @@
 class OrdersController < ApplicationController
+  
+  skip_before_filter :authorize, :only => [:new, :create]
+  
   # GET /orders
   # GET /orders.json
   def index
@@ -54,7 +57,7 @@ class OrdersController < ApplicationController
       if @order.save
         Cart.destroy(session[:cart_id])
         session[:cart_id] = nil
-        Notifier.order_received(@order).deliver
+        # Notifier.order_received(@order)
         format.html { redirect_to store_url, notice: 'Thank you for your order!' }
         format.json { render json: @order, status: :created, location: @order }
       else
