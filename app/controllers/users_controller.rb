@@ -14,12 +14,15 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    begin
     @user = User.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @user }
-    end
+    rescue ActiveRecord::RecordNotFound
+      render :file => 'public/404.html', :status => :not_found, :layout => false
+      end
+    # respond_to do |format|
+    #   format.html # show.html.erb
+    #   format.json { render json: @user }
+    # end
   end
 
   # GET /users/new

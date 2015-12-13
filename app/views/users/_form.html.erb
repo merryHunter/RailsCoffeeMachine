@@ -12,15 +12,23 @@
   <% end %>
 
 <fieldset>
-<legend>Enter User Details</legend>
+<legend><%= t('users.new.user_details')%></legend>
 
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label t('name') %><br />
     <%= f.text_field :name, :size => 40 %>
+  </div>
+  <div class="field">
+    <%= f.label t('users.new.password_field') %><br />
+    <%= f.password_field :password, :size => 40 %>
+  </div>
+  <div class="field">
+    <%= f.label t('users.new.password_confirmation') %><br />
+    <%= f.password_field :password_confirmation, :size => 40 %>
   </div>
 
   <div class="field">
-    <%= f.label :'Credit value' %><br />
+    <%= f.label t('credit') %><br />
     <%= f.text_field :credit, :size => 40 %>
   </div>
 

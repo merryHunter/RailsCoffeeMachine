@@ -2,10 +2,33 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  show:           "Show"
+  edit:           "Edit"
+  destroy:        "Delete"
+  back:           "Back"
+  credit:         "Credit value"
+  name:           "Name"
   layouts:
     application:
-        title:    "Pragmatic Bookshelf"
+        title:    "Coffee machine"
         home:     "Home"
         questions: "Questions"
         news:     "News"
         contact:  "Contact"
+        login:    "Login!"
+        sign_up:  "Sign Up!"
+        profile:  "Profile"
+        orders:   "Orders"
+        drinks:   "Drinks"
+        ingredients:  "Ingredients"
+        users:    "Users"
+        logout:   "Logout"
+        registered: "Already registered? -"
+  users:
+    index:  "value"
+    new:
+        new_user:     "New user"
+        user_details: "Enter User Details"
+        password_field: "Password"
+        password_confirmation: "Password confirmation"
+    error:    "prohibited this user from being saved:"
