@@ -22,7 +22,7 @@
 	</div>
 	<div id="columns">
 		<div id="side">
-      <% if session[:user_id].blank?  %>
+      <% if session[:user_id].nil?  %>
         <div>
           <h3><%= link_to t('.sign_up'), new_user_path %></h3>
           <h3 style="color: white">

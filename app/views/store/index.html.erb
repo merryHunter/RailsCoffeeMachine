@@ -19,8 +19,10 @@
 		<div class="price_line">
 			<span class="price"><%= number_to_currency(product.price) %></span>
       <% if session[:user_id] || session[:admin] and unless session[:user_id].nil? %>
+          <% unless @user.nil? %>
 			    <%= button_to t('drinks.add_to_cart'),
                         line_items_path(:product_id => product, :user_id => @user.id) %>
+              <% end %>
       <% end
          end %>
 
