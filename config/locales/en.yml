@@ -11,6 +11,13 @@ en:
   password:       "Password"
   please:         "Please log in"
   confirm:        "Are you sure?"
+  empty_cart:     "Empty cart"
+  checkout:       "Buy!"
+  cart:           "Your Cart"
+  miss_password:  "Missing password"
+  invalid:        "Invalid user/password combination"
+  logged_out:      "Logged Out!"
+  no_credit:      "You do not have enough credit value!"
   layouts:
     application:
         title:    "Coffee machine"
@@ -35,10 +42,14 @@ en:
         password_field: "Password"
         password_confirmation: "Password confirmation"
     edit_user:         "Editing user"
+    edit_credit_value:  "Add money"
+    invalid_credit:     "You tried to enter invalid value"
     error:    "prohibited this user from being saved:"
     catalog:      "Listing users"
     salt:         "Salt"
   drinks:
+      drink_added:  "Drink added."
+      no_amount:    "Drink has no amount! Choose another one."
       catalog:      "Drinks Catalog"
       add_ingredient:   "Add ingredient"
       add_to_cart:      "Add to Cart!"

@@ -78,8 +78,12 @@ class CartsController < ApplicationController
 
   # DELETE /carts/1
   # DELETE /carts/1.json
+  # TODO: return booked amount of drink
   def destroy
     @cart = current_cart
+    logger.debug("BEFORE_RETURN_BOOK")
+    return_booked_drinks
+
     @cart.destroy
     session[:cart_id] = nil
 
@@ -89,4 +93,15 @@ class CartsController < ApplicationController
       format.js
     end
   end
+
+  private
+    def return_booked_drinks
+        @cart.line_items.each do |item|
+          logger.debug("RETURN_BOOK" + item.id.to_s)
+          product = Product.find_by_id(item.product_id)
+          logger.debug("RETURN_BOOK_Q" + item.quantity.to_s)
+          product.amount += item.quantity
+          product.save
+        end
+    end
 end

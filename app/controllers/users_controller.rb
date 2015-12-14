@@ -62,7 +62,10 @@ class UsersController < ApplicationController
   # PUT /users/1.json
   def update
     @user = User.find(params[:id])
-
+    if @user.credit > params[:user][:credit].to_s.to_i
+      params[:user][:credit] = @user.credit
+      flash[:notice] = t('users.invalid_credit')
+    end
     respond_to do |format|
       if @user.update_attributes(params[:user])
         format.html { redirect_to users_url, notice: 'User was successfully updated.' }

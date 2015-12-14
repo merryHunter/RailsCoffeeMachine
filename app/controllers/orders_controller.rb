@@ -39,7 +39,7 @@ class OrdersController < ApplicationController
     logger.debug("DEBUG_ORDER")
     logger.debug(session[:user_id])
     logger.debug(params[:user_id])
-
+    # decrease user money
     @user = User.find_by_id(session[:user_id])
     @user.credit -= current_cart.total_price
     @user.save

@@ -1,3 +1,6 @@
+require_relative '../util/validation_strategy'
+require_relative '../../app/util/product_no_amount'
+
 class LineItemsController < ApplicationController
   
   skip_before_filter :authorize, :only => :create
@@ -43,33 +46,51 @@ class LineItemsController < ApplicationController
   # POST /line_items
   # POST /line_items.json
   def create
-    logger.debug("CREATE ORDER ELEMENT")
     @cart = current_cart
-    product = Product.find(params[:product_id])
-    # ingredient = Ingredient.find(params[:ingredient])
-    # logger.debug("INGREDIENT" + ingredient.title)
-    user = User.find_by_id(params[:user_id])
-    if @cart.total_price + product.price <= user.credit
-      logger.debug("ADD ORDER ELEMENT")
-      @line_item = @cart.add_product(product.id)
-      respond_to do |format|
+    validation = ValidationStrategy.new @cart, params[:user_id], params[:product_id]
+    validation.calculation = CreditCalculation
+
+    # if User has enough money to buy it
+    if validation.calculation.calculate
+      ## try to book the drink
+      begin
+      validation.calculation = AmountCalculation
+      if validation.calculation.calculate
+        logger.debug("ADD ORDER ELEMENT")
+        flash[:notice] = t('drinks.drink_added')
+        @line_item = @cart.add_product(params[:product_id])
         if @line_item.save
-          format.html { redirect_to(store_url) }
-          format.json { render json: @line_item, status: :created, location: @line_item }
-          format.js { @current_item = @line_item }
-    else
-      logger.debug("NOT ENOUGH ELEMENT")
-      format.html { render action: "new" }
-      format.json { render json: @line_item.errors, status: :unprocessable_entity,  notice: 'You do not have enough credit value!' }
-      # redirect_to store_path, notice: 'You do not have enough credit value!'
-    end
-
-
-      # else
-
+          logger.debug("CREATED ORDER ELEMENT")
+          respond_to do |format|
+            format.html { redirect_to(store_url) }
+            format.json { render json: @line_item, status: :created, location: @line_item }
+            format.js { @current_item = @line_item }
+            end
+        end
       end
+      rescue ProductNoAmount => e
+          flash[:notice] = t('drinks.no_amount')
+          logger.error(e.message)
+          respond_to do |format|
+            format.html { redirect_to(store_url) }
+            format.json { render json: @line_item.errors,
+                                 status: :unprocessable_entity,
+                                 notice: e.message }
+            end
+      end
+      ##
+    else
+        flash[:notice] = t('no_credit')
+        logger.error("NOT ENOUGH CREDIT VALUE")
+        respond_to do |format|
+            format.html {redirect_to(store_url)}
+            format.json { render json: @line_item.errors,
+                           status: :unprocessable_entity,
+                           notice: 'You do not have enough credit value!' }
+        end
     end
   end
+
 
   # PUT /line_items/1
   # PUT /line_items/1.json

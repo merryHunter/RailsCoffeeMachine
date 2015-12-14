@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
   private
   
   def password_must_be_present
-    errors.add(:password, "missing password") unless hashed_password.present?
+    errors.add(:password, t('miss_password')) unless hashed_password.present?
   end
   
   def generate_salt
@@ -52,6 +52,7 @@ class User < ActiveRecord::Base
   
   def ensure_an_admin_remains
     if User.count.zero?
+      logger.error('Tried to delete last User!')
       raise "cant delete the last user"
     end
   end
