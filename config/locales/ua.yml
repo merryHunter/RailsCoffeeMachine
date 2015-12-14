@@ -1,0 +1,67 @@
+
+ua:
+  show:           "Показати"
+  edit:           "Редагувати"
+  destroy:        "Видалити"
+  back:           "Назад"
+  credit:         "Рахунок"
+  name:           "Ім'я"
+  password:       "Пароль"
+  please:         "Будь ласка, ввійдіть у систему"
+  confirm:        "Ви впевнені?"
+  empty_cart:     "Порожній кошик"
+  checkout:       "Замовити!"
+  cart:           "Мій Кошик"
+  miss_password:  "Відсутній пароль"
+  invalid:        "Невірна комбінація логіна/пароля"
+  logged_out:      "Сесія завершена!"
+  no_credit:      "У Вас недостатньо грошей на рахунку!"
+  layouts:
+    application:
+        title:    "Каво-машина"
+        home:     "Домівка"
+        questions: "Запитання"
+        news:     "Новини"
+        contact:  "Контакти"
+        login:    "Ввійти"
+        sign_up:  "Зареєструватися"
+        profile:  "Профіль"
+        orders:   "Замовлення"
+        drinks:   "Напої"
+        ingredients:  "Інгредієнти"
+        users:    "Користувачі"
+        logout:   "Вихід"
+        registered: "Зареєстровані? -"
+  users:
+      index:
+      new:
+          new_user:     "Новий користувач"
+          user_details: "Ввести дані"
+          password_field: "Пароль"
+          password_confirmation: "Підтвердити пароль"
+      edit_user:         "Редагувати дані"
+      edit_credit_value:  "Додати грошей"
+      invalid_credit:     "Ви задали невірне значення!"
+      error:    "заборонено зберегти даного користувача:"
+      catalog:      "Список користувачів"
+      salt:         "Сіль"
+  drinks:
+      drink_added:  "Додано в кошик."
+      no_amount:    "На жаль, напій закінчився :( Оберіть інший."
+      catalog:      "Каталог напоїв"
+      add_ingredient:   "Додати інгредієнт"
+      add_to_cart:      "У кошик!"
+      title:          "Назва"
+      description:    "Опис"
+      image_url:      "Url зображення"
+      price:        "Ціна"
+      amount:       "Кількість"
+      add_drink:    "Додати напій"
+
+  ingredients:
+      catalog:      "Список інгредієнтів"
+
+  orders:
+        catalog:      "Список замовлень"
+        user_id:      "ID користувача"
+        cart_id:      "ID кошику"
