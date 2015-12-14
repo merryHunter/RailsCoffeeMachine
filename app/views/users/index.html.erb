@@ -1,11 +1,11 @@
-<h1>Listing users</h1>
+<h1><%= t('users.catalog') %></h1>
 <% if notice %>
 	<p id="notice"><%= notice %></p>
 <% end %>
 
 <table>
   <tr>
-    <th>Name</th>
+    <th><%= t('name') %></th>
     <th></th>
     <th></th>
     <th></th>
@@ -15,10 +15,10 @@
    <% if session[:user_id] == user.id %>
       <tr>
         <td><%= user.name %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
+        <td><%= link_to t('show'), user %></td>
+        <td><%= link_to t('edit'), edit_user_path(user) %></td>
         <% if session[:admin] %>
-          <td><%= link_to 'Destroy', user, confirm: 'Are you sure?', method: :delete %></td>
+          <td><%= link_to t('destroy'), user, confirm: t('confirm'), method: :delete %></td>
         <% end %>
       </tr>
    <% end %>
@@ -27,5 +27,5 @@
 
 <br />
 <% if session[:admin]  %>
-<%= link_to 'New User', new_user_path %>
+<%= link_to t('users.new.new_user'), new_user_path %>
 <% end %>

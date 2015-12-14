@@ -2,7 +2,7 @@
 <p id="notice"><%= notice %></p>
 <% end %>
 
-<h1>Drinks Catalog</h1>
+<h1><%= t('drinks.catalog')%></h1>
 
 <% @products.each do |product| %>
 	<div class="entry">
@@ -11,7 +11,7 @@
                 :method => :post, :remote => true %>
 		<h3><%= product.title %></h3>
 		<%= sanitize(product.description) %>
-    <h4>Add ingredient...
+    <h4><%= t('drinks.add_ingredient')%>
     <%= select_tag 'ingredient',
                     options_from_collection_for_select(@ingredients, 'id', 'title' )
                      %>
@@ -19,7 +19,9 @@
 		<div class="price_line">
 			<span class="price"><%= number_to_currency(product.price) %></span>
       <% if session[:user_id] || session[:admin] and unless session[:user_id].nil? %>
-			    <%= button_to 'Add To Cart', line_items_path(:product_id => product, :user_id => @user.id), :remote => true %>
+			    <%= button_to t('drinks.add_to_cart'),
+                        line_items_path(:product_id => product, :user_id => @user.id),
+                        :remote => true %>
       <% end
          end %>
 

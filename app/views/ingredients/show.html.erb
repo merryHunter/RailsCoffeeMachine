@@ -1,20 +1,20 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Title:</b>
+  <b><%= t('drinks.title') %></b>
   <%= @ingredient.title %>
 </p>
 
 <p>
-  <b>Price:</b>
+  <b><%= t('drinks.price') %></b>
   <%= @ingredient.price %>
 </p>
 
 <p>
-  <b>Amount:</b>
+  <b><%= t('drinks.amount') %></b>
   <%= @ingredient.amount %>
 </p>
 
 
-<%= link_to 'Edit', edit_ingredient_path(@ingredient) %> |
-<%= link_to 'Back', ingredients_path %>
+<%= link_to t('edit'), edit_ingredient_path(@ingredient) %> |
+<%= link_to t('back'), ingredients_path %>

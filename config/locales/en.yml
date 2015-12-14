@@ -8,6 +8,9 @@ en:
   back:           "Back"
   credit:         "Credit value"
   name:           "Name"
+  password:       "Password"
+  please:         "Please log in"
+  confirm:        "Are you sure?"
   layouts:
     application:
         title:    "Coffee machine"
@@ -31,4 +34,23 @@ en:
         user_details: "Enter User Details"
         password_field: "Password"
         password_confirmation: "Password confirmation"
+    edit_user:         "Editing user"
     error:    "prohibited this user from being saved:"
+    catalog:      "Listing users"
+    salt:         "Salt"
+  drinks:
+      catalog:      "Drinks Catalog"
+      add_ingredient:   "Add ingredient"
+      add_to_cart:      "Add to Cart!"
+      title:          "Title"
+      description:    "Description"
+      image_url:      "Image url"
+      price:        "Price"
+      amount:       "Amount"
+      add_drink:    "Add drink"
+  ingredients:
+      catalog:      "Listing ingredients"
+  orders:
+        catalog:      "Listing Orders"
+        user_id:      "User ID"
+        cart_id:      "Cart ID"

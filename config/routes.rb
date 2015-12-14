@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :ingredients
+
 
   get "admin/index"
 
@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   resources :line_items
 
   resources :carts
+
+  resources :ingredients
 
   get "store/index"
   get "admin" => 'admin#index'
