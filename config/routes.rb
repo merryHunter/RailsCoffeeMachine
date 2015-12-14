@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     delete 'logout' => :destroy
   end
   scope '(:locale)' do
+    resources :ingredients
     resources :users
     resources :orders
     resources :line_items

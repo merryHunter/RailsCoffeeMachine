@@ -32,7 +32,7 @@
         <% else %>
           <div><%= link_to t('.profile'), users_path %></div>
           <div><h3 style="color: white">
-            Credit value:
+            <%= t('credit')%>:
             <%= get_credit_value(session[:user_id]) %>
           </h3></div>
       <% end %>
